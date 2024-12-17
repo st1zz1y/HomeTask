@@ -68,17 +68,18 @@ func ShowTrainingInfo(action int, trainingType string, duration, weight, height 
 // RunningSpentCalories возвращает количество потраченных калорий при беге.
 func RunningSpentCalories(action int, weight, duration float64) float64 {
 	speed := meanSpeed(action, duration)
-	// Формула для расчета калорий при беге
-	return ((runningCaloriesMeanSpeedMultiplier * speed * runningCaloriesMeanSpeedShift) * weight / mInKm * duration * minInH)
+	// Исправленная формула для расчета калорий при беге
+	return ((runningCaloriesMeanSpeedMultiplier*speed + runningCaloriesMeanSpeedShift) * weight * duration)
 }
 
 // WalkingSpentCalories возвращает количество потраченных калорий при ходьбе.
 func WalkingSpentCalories(action int, duration, weight, height float64) float64 {
 	speed := meanSpeed(action, duration)
-	// Переводим скорость в метры в секунду
-	speedInMetersPerSecond := speed * mInKm / (minInH * 60)
+	// Переводим скорость в метры в секунду с использованием правильного коэффициента
+	speedInMetersPerSecond := speed * kmhInMsec
 	// Формула для расчета калорий при ходьбе
-	return ((walkingCaloriesWeightMultiplier * weight) + (math.Pow(speedInMetersPerSecond, 2) / height * walkingSpeedHeightMultiplier * weight)) * duration * minInH
+	return ((walkingCaloriesWeightMultiplier * weight) +
+		(math.Pow(speedInMetersPerSecond, 2) / height * walkingSpeedHeightMultiplier * weight)) * duration * minInH
 }
 
 // swimmingMeanSpeed возвращает среднюю скорость при плавании.
