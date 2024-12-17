@@ -2,7 +2,6 @@ package ftracker
 
 import (
 	"fmt"
-	"math"
 )
 
 const (
@@ -22,12 +21,10 @@ const (
 	swimmingCaloriesWeightMultiplier = 2   // множитель веса при плавании
 )
 
-// distance возвращает дистанцию(в километрах), которую преодолел пользователь за время тренировки
 func distance(action int) float64 {
 	return float64(action) * lenStep / mInKm
 }
 
-// meanSpeed возвращает значение средней скорости движения во время тренировки
 func meanSpeed(action int, duration float64) float64 {
 	if duration == 0 {
 		return 0
@@ -35,7 +32,6 @@ func meanSpeed(action int, duration float64) float64 {
 	return distance(action) / duration
 }
 
-// ShowTrainingInfo возвращает строку с информацией о тренировке
 func ShowTrainingInfo(action int, trainingType string, duration, weight, height float64, lengthPool, countPool int) string {
 	switch trainingType {
 	case "Бег":
