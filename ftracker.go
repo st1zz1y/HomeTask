@@ -5,7 +5,6 @@ import (
 	"math"
 )
 
-// Основные константы, необходимые для расчетов.
 const (
 	lenStep   = 0.65  // Средняя длина шага
 	mInKm     = 1000  // Количество метров в километре
@@ -73,7 +72,7 @@ func RunningSpentCalories(action int, weight, duration float64) float64 {
 // WalkingSpentCalories возвращает количество потраченных калорий при ходьбе.
 func WalkingSpentCalories(action int, duration, weight, height float64) float64 {
 	speed := meanSpeed(action, duration)
-	speedInMetersPerSecond := speed * mInKm / (minInH * 60) // Скорость в метрах в секунду
+	speedInMetersPerSecond := speed * mInKm / (minInH * 60) // скорость в метрах в секунду
 	// Формула для расчета калорий при ходьбе
 	return ((walkingCaloriesWeightMultiplier * weight) + (math.Pow(speedInMetersPerSecond, 2) / height * walkingSpeedHeightMultiplier * weight)) * duration * minInH
 }
