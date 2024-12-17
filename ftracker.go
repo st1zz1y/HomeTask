@@ -73,7 +73,7 @@ func RunningSpentCalories(action int, weight, duration float64) float64 {
 // WalkingSpentCalories возвращает количество потраченных калорий при ходьбе.
 func WalkingSpentCalories(action int, duration, weight, height float64) float64 {
 	speed := meanSpeed(action, duration)
-	speedInMetersPerSecond := speed * mInKm / minInH / 60 // переводим скорость в метры в секунду
+	speedInMetersPerSecond := speed * mInKm / (minInH * 60) // скорость в метрах в секунду
 	// Формула для расчета калорий при ходьбе
 	return ((walkingCaloriesWeightMultiplier * weight) + (math.Pow(speedInMetersPerSecond, 2) / height * walkingSpeedHeightMultiplier * weight)) * duration * minInH
 }
