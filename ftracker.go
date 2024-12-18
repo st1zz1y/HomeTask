@@ -37,20 +37,22 @@ func ShowTrainingInfo(action int, trainingType string, duration, weight, height 
         dist = distance(action)
         speed = meanSpeed(action, duration)
         calories = RunningSpentCalories(action, weight, duration)
+		return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n", trainingType, duration, distance, speed, calories)
     case "Ходьба":
         dist = distance(action)
         speed = meanSpeed(action, duration)
         calories = WalkingSpentCalories(action, duration, weight, height)
+		return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n", trainingType, duration, distance, speed, calories)
     case "Плавание":
         dist = float64(lengthPool*countPool) / mInKm
         speed = swimmingMeanSpeed(lengthPool, countPool, duration)
         calories = SwimmingSpentCalories(lengthPool, countPool, duration, weight)
+		return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n", trainingType, duration, distance, speed, calories)
     default:
         return "неизвестный тип тренировки"
     }
 
-    return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n", trainingType, duration, dist, speed, calories)
-}
+    
 
 // Константы для расчета калорий, расходуемых при беге.
 const (
@@ -74,7 +76,7 @@ const (
 func WalkingSpentCalories(action int, duration, weight, height float64) float64 {
     speed := meanSpeed(action, duration)
     speedInMetersPerSecond := speed * kmhInMsec
-    return (walkingCaloriesWeightMultiplier*weight + (math.Pow(speedInMetersPerSecond, 2)/height)*walkingSpeedHeightMultiplier*weight) * duration * minInH
+    return (walkingCaloriesWeightMultiplier*weight + (speedInMetersPerSecond**2)/height)*walkingSpeedHeightMultiplier*weight) * duration * minInH
 }
 
 // Константы для расчета калорий, расходуемых при плавании.
