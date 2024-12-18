@@ -5,7 +5,6 @@ import (
     "math"
 )
 
-// Основные константы, необходимые для расчетов.
 const (
     lenStep   = 0.65  // средняя длина шага.
     mInKm     = 1000  // количество метров в километре.
@@ -51,7 +50,7 @@ func ShowTrainingInfo(action int, trainingType string, duration, weight, height 
     default:
         return "неизвестный тип тренировки"
     }
-
+}
     
 
 // Константы для расчета калорий, расходуемых при беге.
