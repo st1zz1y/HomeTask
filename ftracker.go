@@ -23,8 +23,8 @@ func meanSpeed(action int, duration float64) float64 {
 	if duration == 0 {
 		return 0
 	}
-	dist := distance(action)
-	return dist / duration
+	distance := distance(action)
+	return distance / duration
 }
 
 // ShowTrainingInfo возвращает строку с информацией о тренировке.
@@ -32,7 +32,6 @@ func ShowTrainingInfo(action int, trainingType string, duration, weight, height 
 
 	heightInMeters := height / cmInM
 
-	var dist, speed, calories float64
 	switch trainingType {
 	case "Бег":
 		dist = distance(action)
@@ -40,12 +39,12 @@ func ShowTrainingInfo(action int, trainingType string, duration, weight, height 
 		calories = RunningSpentCalories(action, weight, duration)
 		return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n", trainingType, duration, dist, speed, calories)
 	case "Ходьба":
-		dist = distance(action)
+		distance = distance(action)
 		speed = meanSpeed(action, duration)
 		calories = WalkingSpentCalories(action, duration, weight, heightInMeters)
 		return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n", trainingType, duration, dist, speed, calories)
 	case "Плавание":
-		dist = float64(lengthPool*countPool) / mInKm
+		distance = float64(lengthPool*countPool) / mInKm
 		speed = swimmingMeanSpeed(lengthPool, countPool, duration)
 		calories = SwimmingSpentCalories(lengthPool, countPool, duration, weight)
 		return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n", trainingType, duration, dist, speed, calories)
