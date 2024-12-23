@@ -61,9 +61,8 @@ const (
 )
 
 // RunningSpentCalories возвращает количество потраченных калорий при беге.
-func RunningSpentCalories(dist, weight, duration float64, dist float64) float64 {
-	speed := meanSpeed(dist, duration)
-	//averageSpeed := dist / duration
+func RunningSpentCalories(action int, weight, duration float64) float64 {
+	speed := meanSpeed(action, duration)
 	return (runningCaloriesMeanSpeedMultiplier * speed + runningCaloriesMeanSpeedShift) * weight/mInKm * duration * minInH
 }
 
@@ -95,7 +94,7 @@ func swimmingMeanSpeed(lengthPool, countPool int, duration float64) float64 {
 }
 
 // SwimmingSpentCalories возвращает количество потраченных калорий при плавании.
-func SwimmingSpentCalories(dist, duration, weight float64) float64 {
-	speed := swimmingMeanSpeed(dist, duration)
+func SwimmingSpentCalories(lengthPool, countPool int, duration, weight float64) float64 {
+	speed := swimmingMeanSpeed(lengthPool, countPool, duration)
 	return (speed + swimmingCaloriesMeanSpeedShift) * swimmingCaloriesWeightMultiplier * weight * duration
 }
