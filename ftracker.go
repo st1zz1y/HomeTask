@@ -63,7 +63,7 @@ const (
 // RunningSpentCalories возвращает количество потраченных калорий при беге.
 func RunningSpentCalories(action int, weight, duration float64) float64 {
 	speed := meanSpeed(action, duration)
-	return (runningCaloriesMeanSpeedMultiplier * speed + runningCaloriesMeanSpeedShift) * weight/mInKm * duration * minInH
+	return (runningCaloriesMeanSpeedMultiplier * speed * runningCaloriesMeanSpeedShift) * weight/mInKm * duration * minInH
 }
 
 // Константы для расчета калорий, расходуемых при ходьбе.
